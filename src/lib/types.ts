@@ -8,4 +8,19 @@ export interface LineItem {
   qty: number;
   front: typeof COLORS[number]["id"];
   sides: typeof COLORS[number]["id"];
+  groupTag?: string; // etiqueta para agrupar en carrito (diseño IA)
+}
+
+export interface AiForm {
+  width?: number; // cm
+  height?: number; // cm
+  depth?: number; // cm
+  notes?: string;
+}
+
+export interface ProposalItem {
+  moduleId: ModuleId;
+  qty: number;
+  front: typeof COLORS[number]["id"]; // editable en etapa de personalización
+  sides: typeof COLORS[number]["id"]; // editable en etapa de personalización
 }

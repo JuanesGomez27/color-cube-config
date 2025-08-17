@@ -17,50 +17,52 @@ export default function Index() {
     sides: "light-wood",
   });
 
-  const jumpToConfigurator = () => {
-    document.querySelector("#configurador")?.scrollIntoView({ behavior: "smooth" });
+  const jumpToAi = () => {
+    document.querySelector("#ai-design")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const onAddToCart = (li: LineItem) => {
     (window as any).addToCart?.(li);
   };
 
+  const onAcceptAiDesignToCart = (items: LineItem[], label: string) => {
+    items.forEach((it) => (window as any).addToCart?.(it));
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header onJumpToConfigurator={jumpToConfigurator} />
+      <Header onJumpToAi={jumpToAi} />
       <main>
-        <Hero onJumpToConfigurator={jumpToConfigurator} />
+        <Hero onJumpToAi={jumpToAi} />
+
+        {/* Flujo principal: IA */}
+        <AiDesignSection onAcceptToCart={onAcceptAiDesignToCart} />
+
+        {/* Alternativa manual */}
         <Catalogo onPick={(m: ModuleId) => setSelected({ ...selected, moduleId: m })} />
         <Configurador selected={selected} setSelected={setSelected} onAddToCart={onAddToCart} />
-        <AiDesignSection />
 
         {/* Cómo funciona */}
         <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="text-2xl font-semibold">Cómo funciona</h2>
           <div className="mt-6 grid md:grid-cols-3 gap-6">
-            {["Elige módulo(s)", "Personaliza colores", "Compra y recibe"].map((step, i) => (
+            {["Sube tu foto y medidas", "IA propone un diseño", "Personaliza colores y compra"].map((step, i) => (
               <Card key={i} className="rounded-2xl">
                 <CardHeader><CardTitle>{i + 1}. {step}</CardTitle></CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground text-sm">Proceso simple en tres pasos. Nada de configuraciones complejas.</p>
+                  <p className="text-muted-foreground text-sm">Flujo simple y guiado. Siempre puedes usar el modo manual si prefieres.</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </section>
 
-        {/* Inspiración */}
-        <section id="inspiracion" className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="text-2xl font-semibold">Inspiración</h2>
-          <p className="text-muted-foreground">Muy pronto: galería con diseños reales y "Copia este diseño".</p>
-        </section>
-
         {/* FAQ */}
         <section id="faq" className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="text-2xl font-semibold">Preguntas frecuentes</h2>
           <div className="mt-4 space-y-2 text-sm text-foreground">
-            <p><strong>¿Puedo cambiar medidas?</strong> No. Las dimensiones son fijas por modelo A–E.</p>
-            <p><strong>¿Puedo combinar colores?</strong> Sí, frente y laterales pueden ser distintos.</p>
+            <p><strong>¿Puedo cambiar medidas o mover módulos?</strong> En el flujo con IA no; la IA ajusta por ti. Puedes usar el modo manual si lo prefieres.</p>
+            <p><strong>¿Puedo combinar colores?</strong> Sí, frente y laterales por módulo.</p>
             <p><strong>¿Cómo se calcula el precio?</strong> Según módulo y acabados seleccionados, en tiempo real.</p>
           </div>
         </section>
@@ -78,8 +80,8 @@ export default function Index() {
 
       {/* Botón flotante CTA */}
       <div className="fixed bottom-4 right-4">
-        <Button className="rounded-2xl shadow-medium" onClick={jumpToConfigurator}>
-          Diseñar mi mueble
+        <Button className="rounded-2xl shadow-medium" onClick={jumpToAi}>
+          Diseñar con IA
         </Button>
       </div>
     </div>

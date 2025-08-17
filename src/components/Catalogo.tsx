@@ -14,11 +14,11 @@ export function Catalogo({ onPick }: CatalogoProps) {
     <section id="catalogo" className="mx-auto max-w-6xl px-4 py-12">
       <div className="flex items-end justify-between">
         <div>
-          <h2 className="text-2xl font-semibold">Catálogo</h2>
-          <p className="text-muted-foreground">Explora los módulos base (dimensiones fijas).</p>
+          <h2 className="text-2xl font-semibold">Catálogo (manual)</h2>
+          <p className="text-muted-foreground">Explora los módulos base A–E (dimensiones fijas). Flujo alternativo al de IA.</p>
         </div>
-        <a href="#configurador" className="text-sm underline hover:text-primary transition-colors">
-          Ir al configurador
+        <a href="#ai-design" className="text-sm underline hover:text-primary transition-colors">
+          Volver a Diseño con IA
         </a>
       </div>
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -36,7 +36,7 @@ export function Catalogo({ onPick }: CatalogoProps) {
               </div>
               <div className="mt-4 flex items-center justify-between">
                 <div className="text-muted-foreground text-sm">Desde ${m.basePrice} USD</div>
-                <Button size="sm" onClick={() => onPick(m.id)}>Personalizar</Button>
+                <Button size="sm" onClick={() => onPick(m.id)}>Personalizar manual</Button>
               </div>
             </CardContent>
           </Card>

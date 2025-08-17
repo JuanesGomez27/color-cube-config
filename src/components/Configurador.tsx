@@ -23,9 +23,9 @@ export function Configurador({ selected, setSelected, onAddToCart }: Configurado
 
   return (
     <section id="configurador" className="mx-auto max-w-6xl px-4 py-12">
-      <h2 className="text-2xl font-semibold">Configurador</h2>
+      <h2 className="text-2xl font-semibold">Configurador (manual)</h2>
       <p className="text-muted-foreground">
-        Combina módulos A–E. Sólo cambia colores (frente/laterales). Las dimensiones no se modifican.
+        Alternativa para usuarios avanzados. En el flujo principal, la IA diseña por ti.
       </p>
 
       <div className="mt-6 grid lg:grid-cols-2 gap-8">
