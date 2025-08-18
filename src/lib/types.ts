@@ -24,3 +24,12 @@ export interface ProposalItem {
   front: typeof COLORS[number]["id"]; // editable en etapa de personalización
   sides: typeof COLORS[number]["id"]; // editable en etapa de personalización
 }
+
+export interface CartItem {
+  id: string;
+  name: string;
+  qty: number;
+  price: number;
+  meta?: any;
+  groupTag?: string;
+}

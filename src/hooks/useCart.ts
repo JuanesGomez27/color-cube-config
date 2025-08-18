@@ -1,38 +1,31 @@
 import { useState, useCallback } from "react";
-import type { LineItem } from "@/lib/types";
-import { computeItemPrice } from "@/lib/furniture-utils";
+import type { CartItem } from "@/lib/types";
 
 export function useCart() {
-  const [items, setItems] = useState<LineItem[]>([]);
+  const [items, setItems] = useState<CartItem[]>([]);
 
-  const addToCart = useCallback((li: LineItem) => {
+  const add = useCallback((item: CartItem) => {
     setItems((prev) => {
-      const key = `${li.moduleId}-${li.front}-${li.sides}`;
-      const existingIndex = prev.findIndex((p) => `${p.moduleId}-${p.front}-${p.sides}` === key);
-      if (existingIndex >= 0) {
-        const copy = [...prev];
-        copy[existingIndex] = { ...copy[existingIndex], qty: copy[existingIndex].qty + li.qty };
-        return copy;
+      const idx = prev.findIndex(p => p.id === item.id && p.groupTag === item.groupTag);
+      if (idx >= 0) { 
+        const copy = [...prev]; 
+        copy[idx] = { ...copy[idx], qty: copy[idx].qty + item.qty }; 
+        return copy; 
       }
-      return [...prev, { ...li, id: crypto.randomUUID() }];
+      return [...prev, item];
     });
   }, []);
 
-  const updateQty = useCallback((id: string, delta: number) => {
-    setItems((prev) => prev.map((p) => (p.id === id ? { ...p, qty: Math.max(1, p.qty + delta) } : p)));
+  const setQty = useCallback((id: string, qty: number) => {
+    setItems((prev) => prev.map(p => p.id === id ? { ...p, qty: Math.max(1, qty) } : p));
   }, []);
 
   const removeItem = useCallback((id: string) => {
-    setItems((prev) => prev.filter((p) => p.id !== id));
+    setItems((prev) => prev.filter(p => p.id !== id));
   }, []);
 
-  const total = items.reduce((acc, it) => acc + computeItemPrice(it.moduleId, it.front, it.sides) * it.qty, 0);
+  const clear = () => setItems([]);
+  const total = items.reduce((s, it) => s + it.qty * it.price, 0);
 
-  return {
-    items,
-    addToCart,
-    updateQty,
-    removeItem,
-    total
-  };
+  return { items, add, setQty, removeItem, clear, total };
 }

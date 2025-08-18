@@ -18,7 +18,7 @@ export default function Index() {
   });
 
   const jumpToAi = () => {
-    document.querySelector("#ai-design")?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#ai")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const onAddToCart = (li: LineItem) => {
@@ -42,21 +42,6 @@ export default function Index() {
         <Catalogo onPick={(m: ModuleId) => setSelected({ ...selected, moduleId: m })} />
         <Configurador selected={selected} setSelected={setSelected} onAddToCart={onAddToCart} />
 
-        {/* Cómo funciona */}
-        <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="text-2xl font-semibold">Cómo funciona</h2>
-          <div className="mt-6 grid md:grid-cols-3 gap-6">
-            {["Sube tu foto y medidas", "IA propone un diseño", "Personaliza colores y compra"].map((step, i) => (
-              <Card key={i} className="rounded-2xl">
-                <CardHeader><CardTitle>{i + 1}. {step}</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm">Flujo simple y guiado. Siempre puedes usar el modo manual si prefieres.</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
         {/* FAQ */}
         <section id="faq" className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="text-2xl font-semibold">Preguntas frecuentes</h2>
@@ -72,8 +57,8 @@ export default function Index() {
         <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-muted-foreground flex flex-col md:flex-row items-center justify-between gap-2">
           <div>© {new Date().getFullYear()} modulo</div>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-foreground transition-colors">Políticas</a>
-            <a href="#" className="hover:text-foreground transition-colors">Contacto</a>
+            <a href="/faq" className="hover:text-foreground transition-colors">FAQ</a>
+            <a href="/contacto" className="hover:text-foreground transition-colors">Contacto</a>
           </div>
         </div>
       </footer>
