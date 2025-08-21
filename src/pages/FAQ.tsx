@@ -1,3 +1,5 @@
+import { Header } from "@/components/Header";
+
 export default function FAQ() {
   const faqs = [
     { q: "¿Cómo funciona la IA?", a: "Subes una foto y medidas básicas; la IA propone una composición con nuestros módulos A–E. Luego eliges colores y compras." },
@@ -9,6 +11,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Header />
       <main>
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-14">
           <h1 className="text-3xl font-semibold mb-4">Preguntas frecuentes</h1>
