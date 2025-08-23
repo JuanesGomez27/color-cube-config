@@ -20,5 +20,39 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+    /* SPA link hijack: rewrite internal links (/path) to hash routes (#/path) */
+    (function () {
+      function rewriteInternalLinks(root = document) {
+        root.querySelectorAll('a[href^="/"]').forEach(a => {
+          const href = a.getAttribute('href');
+          if (!href) return;
+          if (!a.dataset.originalHref) a.dataset.originalHref = href;
+          a.setAttribute('href', '#' + href);
+        });
+      }
+
+      // Initial pass
+      rewriteInternalLinks();
+
+      // Re-apply when Lovable re-renders content
+      const mo = new MutationObserver(muts => muts.forEach(m => rewriteInternalLinks(m.target)));
+      mo.observe(document.body, { childList: true, subtree: true });
+
+      // Safety: prevent full-page reload on any leftover internal links
+      document.addEventListener('click', (e) => {
+        const a = e.target && e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        const href = a.getAttribute && a.getAttribute('href');
+        if (!href) return;
+
+        if (href.startsWith('/')) {
+          e.preventDefault();
+          window.location.hash = href.startsWith('#') ? href : '#' + href;
+        }
+      }, true);
+    })();
+    </script>
   </body>
 </html>
