@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Header } from "@/components/Header";
 
 export default function Nosotros() {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main>
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-6">
           <h1 className="text-3xl font-semibold">Conócenos</h1>

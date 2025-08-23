@@ -1,56 +1,30 @@
-import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Header } from "@/components/Header";
 
 export default function Contacto() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("Gracias, te contactaremos pronto.");
-    setForm({ name: "", email: "", message: "" });
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main>
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-14">
           <h1 className="text-3xl font-semibold">Contacto & Soporte</h1>
           <p className="text-muted-foreground mt-2 max-w-2xl">¿Quieres algo más personalizado? <span className="font-medium">Contáctanos</span> y te ayudamos a ajustar tu diseño.</p>
 
           <div className="grid md:grid-cols-2 gap-8 mt-6">
-            <form className="border border-border rounded-2xl p-5 grid gap-4" onSubmit={handleSubmit}>
+            <form className="border border-border rounded-2xl p-5 grid gap-4" onSubmit={(e) => { e.preventDefault(); alert("Gracias, te contactaremos pronto."); }}>
               <div>
                 <label className="text-xs text-muted-foreground">Nombre</label>
-                <Input 
-                  placeholder="Tu nombre" 
-                  className="mt-1" 
-                  value={form.name}
-                  onChange={e => setForm(s => ({ ...s, name: e.target.value }))}
-                />
+                <Input placeholder="Tu nombre" className="mt-1" />
               </div>
               <div>
                 <label className="text-xs text-muted-foreground">Email</label>
-                <Input 
-                  type="email" 
-                  placeholder="tu@email.com" 
-                  className="mt-1" 
-                  value={form.email}
-                  onChange={e => setForm(s => ({ ...s, email: e.target.value }))}
-                />
+                <Input type="email" placeholder="tu@email.com" className="mt-1" />
               </div>
               <div>
                 <label className="text-xs text-muted-foreground">Mensaje</label>
-                <Input 
-                  placeholder="Cuéntanos qué necesitas…" 
-                  className="mt-1" 
-                  value={form.message}
-                  onChange={e => setForm(s => ({ ...s, message: e.target.value }))}
-                />
+                <Input placeholder="Cuéntanos qué necesitas…" className="mt-1" />
               </div>
               <Button className="rounded-2xl" type="submit">Enviar</Button>
             </form>

@@ -3,7 +3,11 @@ import { ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/useCart";
 
-export function Header() {
+interface HeaderProps {
+  onJumpToAi?: () => void;
+}
+
+export function Header({ onJumpToAi }: HeaderProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const cart = useCart();
