@@ -31,9 +31,13 @@ export function Hero({ onJumpToAi }: HeroProps) {
       <motion.div 
         initial={{ opacity: 0, y: 10 }} 
         animate={{ opacity: 1, y: 0 }} 
-        className="rounded-2xl border border-border p-4"
+        className="rounded-2xl overflow-hidden shadow-lg"
       >
-        <div className="aspect-video rounded-xl bg-gradient-subtle" />
+        <img 
+          src="/lovable-uploads/80a59ce8-0024-457e-84f0-8801a4171cb7.png" 
+          alt="Muebles modulares modernos en sala de estar" 
+          className="w-full h-full object-cover aspect-video"
+        />
       </motion.div>
     </section>
   );
